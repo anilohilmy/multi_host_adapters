@@ -32,7 +32,7 @@ route.get("/", (req, res) => {
     });
 });
 
-app.get('/users', async (req, res) => {
+route.get('/users', async (req, res) => {
     const { data, error } = await supabase
       .from('users')
       .select('*');
