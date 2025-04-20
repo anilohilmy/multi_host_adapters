@@ -4,7 +4,11 @@ const app = express();
 const { route } = require('./router');
 
 app.use(express.json());
-app.use(route);
+// app.use(route);
+app.get('/', (req, res) => {
+    res.send('Hello from Vercel!');
+  });
+  
 
 // app.listen(process.env.PORT, function(){
 //     console.log("Server running on port 10273");
