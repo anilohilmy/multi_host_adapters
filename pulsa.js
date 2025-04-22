@@ -17,8 +17,8 @@ const getPriceList = function(provider, reply) {
         if (respData.status == "00") {
             const denomList = [];
 
-            if (respData.pricelist.length > 0) {
-                for (const product of respData.pricelist) {
+            if (respData.data.pricelist.length > 0) {
+                for (const product of respData.data.pricelist) {
                     const denom = {
                         product_code: product.product_code,
                         product_nominal: product.product_nominal,
