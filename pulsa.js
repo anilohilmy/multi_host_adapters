@@ -16,7 +16,7 @@ const getPriceList = function(provider, reply) {
     connectionIak(`/api/pricelist/pulsa/${provider}`, data, function(respData) {
         if (respData.status == "00") {
             const denomList = [];
-
+            console.log(`pricelist : ${JSON.stringify(respData.data)}`);
             if (respData.data.pricelist.length > 0) {
                 for (const product of respData.data.pricelist) {
                     const denom = {
