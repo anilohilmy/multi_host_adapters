@@ -3,6 +3,7 @@ const express = require("express");
 const routes = express.Router();
 const helmet = require("helmet");
 const { createClient } = require('@supabase/supabase-js');
+const pulsa = require("./pulsa.js");
 
 const supabase = createClient(
     process.env.SUPABASE_URL,
@@ -26,9 +27,15 @@ routes.use(
     helmet(optionAPIHelmet)
 );
 
-routes.get("/", (req, res) => {
-    res.send(200).json({
-        message: "Hello, World!"
+routes.get("/pulsa/:provider", (req, res) => {
+    const { provider } = req.params;
+    
+    pulsa.getPriceList(provider, (data) => {
+      if (data.status === "00") {
+        res.status(200).json(data);
+      } else {
+        res.status(500).json(data);
+      }
     });
 });
 
