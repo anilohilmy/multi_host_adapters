@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require("express");
-const route = express.Router();
+const routes = express.Router();
 const helmet = require("helmet");
 const { createClient } = require('@supabase/supabase-js');
 
@@ -22,17 +22,17 @@ let optionAPIHelmet = {
     hidePoweredBy: true,
 };
 
-route.use(
+routes.use(
     helmet(optionAPIHelmet)
 );
 
-route.get("/", (req, res) => {
+routes.get("/", (req, res) => {
     res.send(200).json({
         message: "Hello, World!"
     });
 });
 
-route.get('/users', async (req, res) => {
+routes.get('/users', async (req, res) => {
     const { data, error } = await supabase
       .from('users')
       .select('*');
@@ -41,4 +41,4 @@ route.get('/users', async (req, res) => {
     res.json(data);
 });
 
-module.exports = route;
+module.exports = { routes };
